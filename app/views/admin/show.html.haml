@@ -29,16 +29,16 @@
       - if @product.images.present?
         = image_tag @product.images.first.image.url(:medium), class: "img-responsive imgclass2"
       - else
-        = image_tag("fallback.png", size:"350x350", class: "img-responsive imgclass2")
+        = image_tag("http://i32.photobucket.com/albums/d36/stupidalex/ec-sh/fallback_zps04534989.png", size:"350x350", class: "img-responsive imgclass2")
   .col-md-8.col-xs-12
     #product-images
       - if @product.images.present?
         - @product.images.each do |image|
           = link_to( image_tag(image.image.url(:thumb), class: "imgclass2 p-img"), image_path(image), remote: true)
       - else
-        = image_tag("fallback.png", size:"50x50", class: "imgclass2 p-img")
-        = image_tag("fallback.png", size:"50x50", class: "imgclass2 p-img")
-        = image_tag("fallback.png", size:"50x50", class: "imgclass2 p-img")
+        = image_tag("http://i32.photobucket.com/albums/d36/stupidalex/ec-sh/fallback_zps04534989.png", size:"50x50", class: "imgclass2 p-img")
+        = image_tag("http://i32.photobucket.com/albums/d36/stupidalex/ec-sh/fallback_zps04534989.png", size:"50x50", class: "imgclass2 p-img")
+        = image_tag("http://i32.photobucket.com/albums/d36/stupidalex/ec-sh/fallback_zps04534989.png", size:"50x50", class: "imgclass2 p-img")
         / , "data-toggle" => "modal", "data-target" => "#product-image")
 .col-md-12
   %h2 About This Product
