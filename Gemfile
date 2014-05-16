@@ -18,10 +18,23 @@ gem "quiet_assets"
 #thin
 gem 'thin'
 #bootstrap
-gem "bootstrap-sass", "~> 3.1.1"
+gem "bootstrap-sass", :git => "https://github.com/twbs/bootstrap-sass"
 #devise
 gem 'devise'
+#haml
+gem "haml-rails"
+#simple form
+gem "simple_form", :git => "https://github.com/plataformatec/simple_form"
+#paginate
+gem "will_paginate"
+gem "will_paginate-bootstrap"
+gem "state_machine"
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
+gem "rmagick"
+gem 'carrierwave'
+gem "fog"
+gem 'rails_12factor', group: :production
 
   group :development, :test do 
     gem "faker"
@@ -63,3 +76,4 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+ruby "2.1.0"

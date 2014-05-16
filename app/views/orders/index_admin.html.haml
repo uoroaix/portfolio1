@@ -1,0 +1,30 @@
+.container
+  .row
+    %h1 Pending Orders
+    .table
+      - @pending_orders.each do |order|
+        .col-md-6
+          = link_to "Order Number: #{order.order_number}", order_path(order)
+  %hr
+
+  .row
+    %h1 Order Processing
+    .table
+      - @processing_orders.each do |order|
+        .col-md-6
+          = link_to "Order Number: #{order.order_number}", order_path(order)
+  %hr
+  .row
+    %h1 Shipped Orders
+    .table
+      - @shipped_orders.each do |order|
+        .col-md-6
+          = link_to "Order Number: #{order.order_number}", order_path(order)
+  %hr
+  .row
+    %h1 Cancelled Orders
+    .table
+      - @canceled_orders.each do |order|
+        .col-md-6
+          = link_to "Order Number: #{order.order_number}", order_path(order)
+

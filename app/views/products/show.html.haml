@@ -1,0 +1,35 @@
+%h1= @product.name
+%hr
+
+/ #product-image.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+/   .modal-dialog
+/   .modal-content
+/     .modal-body
+/       - @product.images.each do |image|
+/         = image_tag image.image.url(:medium), class: "img-responsive imgclass2"
+/     .modal-footer
+/       %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+.row{style: "min-height: 350px;"}
+  .col-md-4.col-xs-12{style: "min-height: 250px;"}
+    #product-img
+      = image_tag @product.images.first.image.url(:medium), class: "img-responsive imgclass2"
+  .col-md-8.col-xs-12
+    #product-images
+      - @product.images.each do |image|
+        = link_to( image_tag(image.image.url(:thumb), class: "imgclass2 p-img"), image_path(image), remote: true)
+        / , "data-toggle" => "modal", "data-target" => "#product-image")
+.col-md-12
+  %h2 About This Product
+  %h4= @product.description
+  %p
+    Status:
+    - if @product.state.include?("_")
+      = @product.state.split("_").join(" ").capitalize
+    - else
+      = @product.state.capitalize
+  %p
+    Quantity:
+    = @product.quantity
+  %h2= button_to "Add To Cart", add_to_cart_product_path(@product), class: "btn btn-info"
+
+

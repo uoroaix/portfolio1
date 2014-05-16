@@ -1,0 +1,24 @@
+%h1 Your Shopping Cart!
+
+
+- @cart.products.each do |product|
+  .well
+    .row
+      .col-md-10
+        %h4
+          Product Name:
+          = product.name
+        %p
+          Price: $
+          = product.price
+      .col-md-2
+        %h4 
+          Qty:
+          = @cart.cart_products.find_by_product_id(product.id).quantity
+
+
+
+%h3 Your Sub Total: $#{@cart.sub_total}
+
+= button_to "Check Out", new_charge_path, method: :get, class: "btn btn-default"
+= button_to "Back", edit_cart_path(@cart), method: :get, class: "btn btn-default"

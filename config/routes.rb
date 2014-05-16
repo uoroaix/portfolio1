@@ -1,4 +1,38 @@
 Rails.application.routes.draw do
+
+
+  resources :images
+
+  get "my_account" => "my_account#index"
+
+  resources :charges, only: [:new, :create]
+
+  post "charge_exisiting_card" => "charges#charge_existing"
+ 
+
+  resources :cart_products, only: [:destroy]
+
+  resources :orders do
+    collection { get :index_admin }
+  end
+
+  resources :carts, only: [:update, :edit, :show, :destroy]
+
+  resources :admin do
+    collection { post :import }
+  end
+
+  resources :products, only: [:index, :show] do
+    member { post "add_to_cart" => "carts#add_to_cart" }
+  end
+  resources :categories
+
+  devise_for :users, :controllers => {:registrations => "registrations"}
+  
+  resources :profiles
+
+  root to: "home#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

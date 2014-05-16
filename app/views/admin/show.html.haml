@@ -1,0 +1,55 @@
+%h1 Inventory Status: #{@product.state}
+- if current_user.is_admin?
+  - if @product.draft?
+    = link_to "Ready product for sell", admin_path(@product, :event => "product_ready_for_sell"), method: :patch, class: "btn btn-info"
+    = link_to "Cancel This product", admin_path(@product, :event => "remove_product"), method: :patch, class: "btn btn-info", data: {confirm: "Are you sure?"}
+  - elsif @product.in_stock?
+    = link_to "Cancel This product", admin_path(@product, :event => "remove_product"), method: :patch, class: "btn btn-info", data: {confirm: "Are you sure?"}
+  - elsif @product.sold_out?
+    = link_to "Cancel This product", admin_path(@product, :event => "remove_product"), method: :patch, class: "btn btn-info", data: {confirm: "Are you sure?"}
+    = simple_form_for @product, url: admin_path(@product, :event => "set_product_amount") do |f|
+      = f.input :quantity
+      = f.submit "Set Product Amount For Sell!", class: "btn btn-info"
+    / = link_to "Add more product for sell", admin_path(@product, :event => "product_ready_for_sell"), method: :patch, class: "btn btn-info"
+%hr
+%h3= @product.name
+%hr
+
+/ #product-image.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+/   .modal-dialog
+/   .modal-content
+/     .modal-body
+/       - @product.images.each do |image|
+/         = image_tag image.image.url(:medium), class: "img-responsive imgclass2"
+/     .modal-footer
+/       %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+.row{style: "min-height: 350px;"}
+  .col-md-4.col-xs-12{style: "min-height: 250px;"}
+    #product-img
+      - if @product.images.present?
+        = image_tag @product.images.first.image.url(:medium), class: "img-responsive imgclass2"
+      - else
+        = image_tag("fallback.png", size:"350x350", class: "img-responsive imgclass2")
+  .col-md-8.col-xs-12
+    #product-images
+      - if @product.images.present?
+        - @product.images.each do |image|
+          = link_to( image_tag(image.image.url(:thumb), class: "imgclass2 p-img"), image_path(image), remote: true)
+      - else
+        = image_tag("fallback.png", size:"50x50", class: "imgclass2 p-img")
+        = image_tag("fallback.png", size:"50x50", class: "imgclass2 p-img")
+        = image_tag("fallback.png", size:"50x50", class: "imgclass2 p-img")
+        / , "data-toggle" => "modal", "data-target" => "#product-image")
+.col-md-12
+  %h2 About This Product
+  %h4= @product.description
+  %p
+    Status:
+    - if @product.state.include?("_")
+      = @product.state.split("_").join(" ").capitalize
+    - else
+      = @product.state.capitalize
+  %p
+    Quantity:
+    = @product.quantity
+  %h2= button_to "Edit", edit_admin_path(@product), method: :get, class: "btn btn-info"

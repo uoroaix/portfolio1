@@ -1,0 +1,50 @@
+= form_for @profile do |f|
+  %h1 Personal Information
+  .row.margin20
+    .col-md-4
+      = f.label :first_name, "First Name"
+      = f.text_field :first_name, class: "form-control"
+      %p Please enter your real name. 
+    .col-md-4
+      = f.label :last_name, "Last Name"
+      = f.text_field :last_name, class: "form-control"
+  .row.margin20
+    .col-md-4
+      = f.label :phone, "Phone Number"
+      = f.text_field :phone, class: "form-control"
+    .col-md-4
+      = f.label :birthdate, "Birthdate"
+      = f.text_field :birthdate, class: "form-control"
+
+
+  %h1 Shipping Address
+  .row.margin20
+    .col-md-6
+      = f.label :address, "Street Address"
+      = f.text_field :address, class: "form-control"
+    .col-md-2
+      = f.label :suite, "Suite"
+      = f.text_field :suite, class: "form-control"
+      %p Optional
+  .row.margin20
+    .col-md-4
+      = f.label :city, "City"
+      = f.text_field :city, class: "form-control"
+    .col-md-4
+      = f.label :state, "State / Province / Region"
+      = f.text_field :state, class: "form-control"
+  .row.margin20
+    .col-md-4
+      = f.label :country, "Country"
+      = f.text_field :country, class: "form-control"
+    .col-md-4
+      = f.label :postal, "Postal Code"
+      = f.text_field :postal, class: "form-control"
+
+  .row.margin20
+    .col-md-2
+      = f.submit "Submit", class: "btn btn-primary form-control"
+
+.row.margin20
+  .col-md-2
+    = button_to "Skip", root_path, class: "btn btn-info form-control", method: :get

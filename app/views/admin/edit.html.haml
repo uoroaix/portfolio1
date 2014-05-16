@@ -1,0 +1,8 @@
+%h1 Edit #{@product.name}
+= simple_form_for @product, url: admin_path(@product) do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :price
+  = f.input :quantity
+  = f.input :category_id
+  = f.submit "Save Product Info", class: "btn btn-info"

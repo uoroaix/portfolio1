@@ -1,0 +1,23 @@
+%h1 Product Listing Page
+%br
+%hr
+
+%h1 Your Products
+
+- @products.each do |product|
+  .well
+    .row
+      .col-md-3
+        = image_tag product.images.first.image.url(:preview)
+      .col-md-9
+        %p= link_to product.name, product_path(product)
+        %p= product.description.truncate(150)
+        %p
+          $
+          = product.price
+        %p
+          - if product.sold_out?
+            = "This product is currently sold out!"
+.row
+  %td.text-center{colspan: "6"}
+    = will_paginate @products, search: @search_term, renderer: BootstrapPagination::Rails

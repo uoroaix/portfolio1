@@ -1,0 +1,7 @@
+%h1 #{current_user.full_name}'s Account 
+%hr
+.col-md-6.col-xs-6
+  %ul
+    %li= link_to "Your Profile", edit_profile_path(current_user.profile_id), class: "btn btn-default"
+    %br
+    %li= link_to "Your Orders", orders_path, class: "btn btn-default"

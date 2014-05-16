@@ -1,0 +1,6 @@
+%h1 Your Orders
+
+.table
+  - @orders.each do |order|
+    .col-md-6
+      = link_to "Order Number: #{order.order_number}", order_path(order)

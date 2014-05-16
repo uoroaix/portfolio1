@@ -1,0 +1,27 @@
+- if current_user.is_admin?
+  - if @order.pending?
+    = link_to "Confirmed This Order", order_path(@order, :event => "confirmed"), method: :patch, class: "btn btn-info"
+    = link_to "Cancel This Order", order_path(@order, :event => "cancel"), method: :patch, class: "btn btn-info"
+  - elsif @order.processing?
+    = link_to "Ship This Order", order_path(@order, :event => "ship"), method: :patch, class: "btn btn-info"
+    = link_to "Cancel This Order", order_path(@order, :event => "cancel"), method: :patch, class: "btn btn-info"
+  - elsif @order.shipped?
+    = link_to "Cancel This Order", order_path(@order, :event => "cancel"), method: :patch, class: "btn btn-info"
+%h1 Order # #{@order.order_number}
+%hr
+%h3 Order Status: #{@order.state.capitalize}!
+%h3 Products:
+- @order.body.each do |product, details|
+  .well
+    .row
+      %p 
+        Product Name:
+        = product
+      %p 
+        Price: 
+        = details[:price]
+      %p 
+        Qty: 
+        = details[:quantity]
+
+%h3 Total: $ #{@order.paid}

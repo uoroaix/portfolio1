@@ -1,0 +1,10 @@
+%h1 Upload Images With Product ID
+
+
+.well
+  = simple_form_for @image, html: {class: "form-horizontal"}  do |f|
+    = f.input :product_id, label: "Enter Product Id Here:"
+    %br
+    = f.file_field :image
+    %br
+    = f.submit "Upload Image", class: "btn btn-default"

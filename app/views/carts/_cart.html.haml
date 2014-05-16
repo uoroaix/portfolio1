@@ -1,0 +1,24 @@
+- if @cart.cart_products.present?
+  #cart-edit
+    = simple_form_for @cart, html: {class: "form-horizontal"} do |f|
+      = f.fields_for :cart_products do |cp|
+        .well
+          .row
+            .col-md-4
+              = image_tag cp.object.product.images.first.image.url(:preview)
+            .col-md-5
+              %h4= cp.object.name
+              %p
+                $
+                = cp.object.price
+            .col-md-2
+              = cp.input :quantity
+            .col-md-1
+              = link_to "", cart_path(cp.object), class: "btn btn-danger glyphicon glyphicon-remove", data: {confirm: "Do you want to remove this product from your cart?"}, method: :delete, remote: true
+      = f.submit "Next ~>", class: "btn btn-info"
+- else
+  .well
+    .row
+      .col-md-12
+        %h3 Your Cart Is Empty!
+  
