@@ -1,8 +1,0 @@
-development:
-  PUBLISHABLE_KEY: pk_test_wfeZxeXn5lPAGBpORtJs0lgg
-  SECRET_KEY: sk_test_tlQg0MOfhcoKBLNYSwuDFLee
-  s3_access_key_id: AKIAJXDUZ7MUMZSZBKPA
-  s3_secret_key_id: 1/DuN2ujQvaPXhxuDad4HrInZMUBtPVAEfGUTHii
-  s3_bucket: tonarinoalexbucket
-
-production:
