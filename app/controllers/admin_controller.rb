@@ -35,9 +35,15 @@ before_action :check_admin_privilage
 
   def update
     @product = Product.find(params[:id])
-    if params["product"]["quantity"].to_i <= 0
-      flash.now[:alert] = "Please enter number bigger than 0!"
-      render :show
+    if defined? params["product"]["quantity"]
+      if params["product"]["quantity"].to_i <= 0
+        flash.now[:alert] = "Please enter number bigger than 0!"
+        render :show
+      else
+        check_event
+        flash.now[:notice] = "Iventory Status Changed!"
+        render :show
+      end
     else
       if check_event
         flash.now[:notice] = "Iventory Status Changed!"
